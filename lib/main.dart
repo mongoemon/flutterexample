@@ -5,6 +5,7 @@ import 'package:my_flutter_project/automation_testing_components_screen.dart';
 import 'package:my_flutter_project/calculator_app_screen.dart';
 import 'package:my_flutter_project/credits_screen.dart';
 import 'package:my_flutter_project/clicker_game_screen.dart';
+import 'package:my_flutter_project/clicker_game_mode_selection_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         '/automation_components': (context) => AutomationTestingComponentsScreen(),
         '/calculator_app': (context) => CalculatorAppScreen(),
         '/credits': (context) => CreditsScreen(),
-        '/clicker_game': (context) => ClickerGameScreen(),
+        '/clicker_game': (context) => ClickerGameModeSelectionScreen(),
       },
     );
   }

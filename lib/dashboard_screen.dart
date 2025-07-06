@@ -9,6 +9,7 @@ import 'package:my_flutter_project/credits_screen.dart';
 import 'package:my_flutter_project/network_test_screen.dart';
 import 'package:my_flutter_project/flutter_api_usage_screen.dart';
 import 'package:my_flutter_project/turtle_jump_game_screen.dart';
+import 'package:my_flutter_project/clicker_game_mode_selection_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   final String username;
@@ -130,7 +131,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ClickerGameScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ClickerGameModeSelectionScreen()));
                   },
                   child: Text('Simple Clicker Game'),
                 ),

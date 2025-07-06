@@ -258,85 +258,88 @@ class _TurtleJumpGameScreenState extends State<TurtleJumpGameScreen> with Single
               ),
             )
           else // Game screen
-            GestureDetector(
-              onTap: _jump,
-              child: Stack(
-                children: [
-                  // Ground
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: groundHeight,
-                    child: Container(color: Colors.brown.withOpacity(0.7)), // Semi-transparent ground
-                  ),
-                  // Turtle
-                  Positioned(
-                    bottom: groundHeight + turtleY,
-                    left: 50,
-                    child: Image.asset(
-                      'assets/images/turtle.png',
-                      width: turtleSize,
-                      height: turtleSize,
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: _jump,
+                behavior: HitTestBehavior.translucent,
+                child: Stack(
+                  children: [
+                    // Ground
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      height: groundHeight,
+                      child: Container(color: Colors.brown.withOpacity(0.7)), // Semi-transparent ground
                     ),
-                  ),
-                  // Rock
-                  Positioned(
-                    bottom: groundHeight,
-                    left: rockX,
-                    child: Image.asset(
-                      'assets/images/rock.png',
-                      width: 30,
-                      height: rockHeight,
-                      fit: BoxFit.fill,
+                    // Turtle
+                    Positioned(
+                      bottom: groundHeight + turtleY,
+                      left: 50,
+                      child: Image.asset(
+                        'assets/images/turtle.png',
+                        width: turtleSize,
+                        height: turtleSize,
+                      ),
                     ),
-                  ),
-                  // Score
-                  Positioned(
-                    top: 50,
-                    right: 20,
-                    child: Text(
-                      'Score: $score',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+                    // Rock
+                    Positioned(
+                      bottom: groundHeight,
+                      left: rockX,
+                      child: Image.asset(
+                        'assets/images/rock.png',
+                        width: 30,
+                        height: rockHeight,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                  // High Score
-                  Positioned(
-                    top: 80,
-                    right: 20,
-                    child: Text(
-                      'High Score: $_highScore',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black54),
+                    // Score
+                    Positioned(
+                      top: 50,
+                      right: 20,
+                      child: Text(
+                        'Score: $score',
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+                      ),
                     ),
-                  ),
-                  // Game Over Overlay
-                  if (isGameOver)
-                    Positioned.fill(
-                      child: Container(
-                        color: Colors.black54,
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Game Over!',
-                                style: TextStyle(fontSize: 48, color: Colors.white, fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'Final Score: $score',
-                                style: TextStyle(fontSize: 32, color: Colors.white),
-                              ),
-                              SizedBox(height: 30),
-                              ElevatedButton(
-                                onPressed: _startCountdown,
-                                child: Text('Play Again', style: TextStyle(fontSize: 24)),
-                              ),
-                            ],
+                    // High Score
+                    Positioned(
+                      top: 80,
+                      right: 20,
+                      child: Text(
+                        'High Score: $_highScore',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black54),
+                      ),
+                    ),
+                    // Game Over Overlay
+                    if (isGameOver)
+                      Positioned.fill(
+                        child: Container(
+                          color: Colors.black54,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Game Over!',
+                                  style: TextStyle(fontSize: 48, color: Colors.white, fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  'Final Score: $score',
+                                  style: TextStyle(fontSize: 32, color: Colors.white),
+                                ),
+                                SizedBox(height: 30),
+                                ElevatedButton(
+                                  onPressed: _startCountdown,
+                                  child: Text('Play Again', style: TextStyle(fontSize: 24)),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
             ),
         ],

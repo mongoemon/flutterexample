@@ -8,16 +8,7 @@ In a Flutter application, HTTP requests are used to communicate with external ba
 
 ### Pages Using HTTP Requests:
 
-1.  **Login Screen (`login_screen.dart`)**
-    *   **Purpose:** Authenticates a user against a backend service.
-    *   **HTTP Method:** `POST`
-    *   **Endpoint (Simulated):** `https://jsonplaceholder.typicode.com/posts`
-    *   **Explanation:** While the login logic (checking username/password) is currently simulated locally within the app for demonstration purposes, an actual HTTP POST request is made to a dummy endpoint (`jsonplaceholder.typicode.com`). This allows you to observe network traffic in your development tools when attempting to log in, even though the response from the dummy endpoint doesn't dictate the login success.
-    *   **Simulated Responses:**
-        *   **Success (username: `user`, password: `password`):** Behaves as if a `200 OK` was received from a real authentication API.
-        *   **Failure (other credentials):** Behaves as if a `401 Unauthorized` was received from a real authentication API.
-
-2.  **Network Test Screen (`network_test_screen.dart`)**
+1.  **Network Test Screen (`network_test_screen.dart`)
     *   **Purpose:** Demonstrates a direct HTTP GET request to a public API.
     *   **HTTP Method:** `GET`
     *   **Endpoint:** `https://jsonplaceholder.typicode.com/posts/1`
@@ -28,7 +19,15 @@ In a Flutter application, HTTP requests are used to communicate with external ba
 
 ### Pages Not Using Direct HTTP Requests:
 
-1.  **Profile Screen (`profile_screen.dart`)**
+1.  **Login Screen (`login_screen.dart`)
+    *   **Purpose:** Authenticates a user against a backend service.
+    *   **Data Handling:** The login logic (checking username/password) is currently simulated locally within the app for demonstration purposes. No actual HTTP requests are made.
+    *   **Explanation:** Since login is handled locally, you will **not** observe any network traffic originating from this screen's login operations.
+    *   **Simulated Responses:**
+        *   **Success (username: `user`, password: `password`):** Behaves as if a `200 OK` was received from a real authentication API.
+        *   **Failure (other credentials):** Behaves as if a `401 Unauthorized` was received from a real authentication API.
+
+2.  **Profile Screen (`profile_screen.dart`)
     *   **Purpose:** Displays and allows editing of user profile information (name, nickname).
     *   **Data Handling:** This screen primarily uses **local storage** (`shared_preferences` package) to persist the user's name and nickname across app launches. When you update your profile, the changes are saved directly to the device's local storage, not to a remote server via HTTP.
     *   **Explanation:** Since data is handled locally, you will **not** observe any network traffic originating from this screen's save or load operations. The `shared_preferences` package provides a simple key-value store for lightweight data persistence.
