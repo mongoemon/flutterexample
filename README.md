@@ -90,6 +90,46 @@ To run the application on a connected iOS device or simulator (requires a Mac wi
 flutter run
 ```
 
+##### Installing CI/CD Build Artifacts on Device
+
+After a successful CI/CD run, you can download the generated build artifacts (APK for Android, .app bundle for iOS) from the GitHub Actions workflow run summary.
+
+###### For Android (APK)
+
+1.  **Download the `android-apk` artifact:** From your GitHub Actions workflow run, download the artifact named `android-apk`. This will be a `.zip` file containing `app-release.apk`.
+2.  **Extract the APK:** Unzip the downloaded file to get `app-release.apk`.
+3.  **Transfer to your Android device:**
+    *   **USB:** Connect your Android device to your computer via USB and copy the `app-release.apk` file to the device's storage.
+    *   **Cloud Storage/Email:** Upload the APK to a cloud storage service (e.g., Google Drive, Dropbox) or email it to yourself, then download it on your device.
+4.  **Enable "Install unknown apps":** On your Android device, you might need to enable installation from unknown sources for your file browser or Chrome (depending on how you transfer/open the APK). This setting is usually found in `Settings > Apps & notifications > Special app access > Install unknown apps`.
+5.  **Install the APK:** Locate the `app-release.apk` file using a file manager on your device and tap it to install.
+
+###### For iOS (.app bundle)
+
+Installing an unsigned `.app` bundle directly onto a physical iOS device is generally not straightforward and typically requires Xcode or specific command-line tools with a valid development profile.
+
+*   **For iOS Simulators:**
+    1.  **Download the `ios-app` artifact:** From your GitHub Actions workflow run, download the artifact named `ios-app`. This will be a `.zip` file containing `Runner.app`.
+    2.  **Extract the `.app` bundle:** Unzip the downloaded file to get `Runner.app`.
+    3.  **Install to Simulator:** Open your terminal and use `xcrun simctl` to install the app to a running simulator. First, list your available simulators to get a device ID:
+
+        ```bash
+        xcrun simctl list devices
+        ```
+
+    4.  Then, install the app using a simulator's UDID (e.g., `XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX`):
+
+        ```bash
+        xcrun simctl install <simulator_UDID> /path/to/your/Runner.app
+        ```
+
+*   **For Physical iOS Devices:**
+    For physical devices, the `--no-codesign` build is primarily for CI validation or for further processing by tools like Fastlane. To install on a physical device, you typically need to:
+    *   **Sign the app:** Use Xcode to sign the `.app` bundle with a valid Apple Developer account and provisioning profile.
+    *   **Distribute via TestFlight/Ad Hoc:** For easier distribution to testers, consider using Apple's TestFlight or an Ad Hoc distribution method, which requires proper signing during the build process (e.g., using `flutter build ipa --release` with correct Xcode signing settings).
+
+
+
 ##### Building for iOS without Code Signing (for development/testing)
 
 If you want to build and run the iOS application on a simulator or a physical device without a full Apple Developer Program membership (i.e., without automatic code signing), you can follow these steps:
@@ -115,6 +155,29 @@ If you want to build and run the iOS application on a simulator or a physical de
     *   Click the "Run" button (play icon) or go to `Product > Run`.
 
     You might see warnings about code signing, but the app should build and run on the selected simulator or device for development purposes.
+
+## GitHub Actions CI/CD and Releases
+
+This project uses GitHub Actions for Continuous Integration/Continuous Deployment (CI/CD). The workflow is configured to automatically build Android APKs and iOS `.app` bundles (unsigned) and create a GitHub Release when a specific tag is pushed.
+
+### Triggering a Release
+
+To trigger a new release, you need to create and push a Git tag following the `v*.*.*` convention (e.g., `v1.0.0`, `v1.0.1-beta`).
+
+1.  **Create a new Git tag:**
+
+    ```bash
+    git tag vX.Y.Z
+    ```
+    Replace `vX.Y.Z` with your desired version number (e.g., `v1.0.0`).
+
+2.  **Push the tag to GitHub:**
+
+    ```bash
+    git push origin vX.Y.Z
+    ```
+
+Once the tag is pushed, the GitHub Actions workflow will automatically start, build the applications, and create a new release on your GitHub repository with the built artifacts attached.
 
 ### App Overview and Usage
 
