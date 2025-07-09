@@ -90,6 +90,32 @@ To run the application on a connected iOS device or simulator (requires a Mac wi
 flutter run
 ```
 
+##### Building for iOS without Code Signing (for development/testing)
+
+If you want to build and run the iOS application on a simulator or a physical device without a full Apple Developer Program membership (i.e., without automatic code signing), you can follow these steps:
+
+1.  **Open the iOS project in Xcode:**
+    Navigate to the `ios` folder within your Flutter project and open the `Runner.xcworkspace` file.
+
+    ```bash
+    open ios/Runner.xcworkspace
+    ```
+
+2.  **Select the Runner project:**
+    In Xcode, select `Runner` from the Project Navigator on the left sidebar.
+
+3.  **Configure Signing & Capabilities:**
+    *   Go to the `Signing & Capabilities` tab.
+    *   **Uncheck** "Automatically manage signing".
+    *   For the "Team" dropdown, select "None" (if you don't have a personal team) or your personal team if it appears.
+    *   Ensure the "Bundle Identifier" is unique (e.g., `com.yourcompany.myflutterproject`). If you encounter issues, try changing it to something like `com.example.myflutterprojectdev`.
+
+4.  **Select a target and run:**
+    *   Choose your desired simulator or a connected physical device from the scheme dropdown next to the "Run" and "Stop" buttons.
+    *   Click the "Run" button (play icon) or go to `Product > Run`.
+
+    You might see warnings about code signing, but the app should build and run on the selected simulator or device for development purposes.
+
 ### App Overview and Usage
 
 This application features a simple login system and a dashboard with a bottom navigation bar.

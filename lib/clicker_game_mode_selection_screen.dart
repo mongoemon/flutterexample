@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_project/clicker_game_screen.dart';
 
-enum GameMode {
-  onePlayer,
-  twoPlayer,
-}
+enum GameMode { onePlayer, twoPlayer }
 
 class ClickerGameModeSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Select Game Mode'),
-      ),
+      appBar: AppBar(title: Text('Select Game Mode')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -22,7 +17,8 @@ class ClickerGameModeSelectionScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ClickerGameScreen(gameMode: GameMode.onePlayer),
+                    builder: (context) =>
+                        ClickerGameScreen(gameMode: GameMode.onePlayer),
                   ),
                 );
               },
@@ -37,7 +33,8 @@ class ClickerGameModeSelectionScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ClickerGameScreen(gameMode: GameMode.twoPlayer),
+                    builder: (context) =>
+                        ClickerGameScreen(gameMode: GameMode.twoPlayer),
                   ),
                 );
               },
